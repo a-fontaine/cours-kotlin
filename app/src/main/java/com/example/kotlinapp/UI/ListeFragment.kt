@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.example.kotlinapp.API.ApiClient
 import com.example.kotlinapp.R
 import com.example.kotlinapp.adapters.UserAdapter
 import com.example.kotlinapp.models.User
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ListeFragment:Fragment() {
     override fun onCreateView(
@@ -42,10 +45,24 @@ class ListeFragment:Fragment() {
 
         val users = mutableListOf<User>(user1, user2)
 
-        val listView = v.findViewById<ListView>(R.id.list_view)
-        val adapter = UserAdapter(users, requireActivity())
-        listView.adapter = adapter
+        getListOfUser(v)
 
         return v
+    }
+
+    fun getListOfUser(v:View) {
+        GlobalScope.launch {
+            val apiClient = ApiClient()
+            val response = apiClient.apiService.getUsers()
+
+            if(response.isSuccessful && response.body() != null){
+                val content = response.body()
+                val list = content as MutableList<User>
+
+                val listView = v.findViewById<ListView>(R.id.list_view)
+                val adapter = UserAdapter(list, requireActivity())
+                listView.adapter = adapter
+            }
+        }
     }
 }
