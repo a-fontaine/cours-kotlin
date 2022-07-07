@@ -4,13 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_marginRight="10dp"
-        android:layout_marginVertical="10dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,5 +25,11 @@
             android:textSize="20dp"
             android:text="Text View 2"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/marker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/iconmap" />
 
 </LinearLayout>
