@@ -10,6 +10,7 @@ import com.example.kotlinapp.API.ApiClient
 import com.example.kotlinapp.R
 import com.example.kotlinapp.adapters.UserAdapter
 import com.example.kotlinapp.models.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -51,7 +52,7 @@ class ListeFragment:Fragment() {
     }
 
     fun getListOfUser(v:View) {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             val apiClient = ApiClient()
             val response = apiClient.apiService.getUsers()
 
